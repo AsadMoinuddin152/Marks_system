@@ -5,6 +5,10 @@ const FacultySchema = new mongoose.Schema({
     type: String,
     required: [true, "name is require"],
   },
+  userId: {
+    type: String,
+    required: [true, "userId is require"],
+  },
   email: {
     type: String,
     required: [true, "email is require"],

@@ -15,6 +15,9 @@ connectDB();
 //rest obejct
 const app = express();
 
+//Routes
+app.use('/api/v1/faculty', require('./server/routes/facultyRoutes'));
+
 //port
 const port = process.env.PORT || 8080;
 //listen port

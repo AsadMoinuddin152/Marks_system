@@ -2,7 +2,7 @@ const express = require('express');
 const {
     loginController,
     authController,
-} = require('../controllers/userCtrl');
+} = require('../controllers/facultyCtrl.js');
 const authMiddleware = require('../middlewares/authMiddleware.js');
 
 //router onject
