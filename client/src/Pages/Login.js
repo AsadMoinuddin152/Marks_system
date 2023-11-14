@@ -1,19 +1,18 @@
 import React from "react";
 import { Form, Input } from "antd";
 import { useNavigate } from "react-router-dom";
+import '../styles/LoginPage.css'
 
 const Login = () => {
   const navigate = useNavigate();
   const onFinish = (values) => {
     console.log("Success:", values);
-    navigate("/");
+    navigate("/homepage");
   };
   return (
     <div>
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 8 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >

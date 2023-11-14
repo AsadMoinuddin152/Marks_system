@@ -1,0 +1,79 @@
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-back {
+    background-color: #ffffff;
+    border-radius: 15px;
+    height: 25em;
+    width: 40em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ 
+.login-text {
+    color: #000000;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 40px;
+    font-weight: 700;
+    height: 66px;
+    letter-spacing: 2px;
+    line-height: normal;
+    width: 342px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2em;
+    background-color: #f2f2f2;
+}
+
+.textbox {
+    background: none;
+    height: 59px;
+    width: 481px;
+    border: none;
+
+    font-family: "Inter-Regular", Helvetica;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.logo {
+    height: 32px;
+    object-fit: cover;
+    width: 32px;
+    padding: 14.5px;
+    opacity: 0.5;
+}
+
+button {
+    background-color: #2f76ff;
+    border-radius: 20px;
+    height: 81px;
+    width: 348px;
+    border: none;
+
+    color: #ffffff;
+    font-family: "Inter-Medium", Helvetica;
+    font-size: 64px;
+    font-weight: 500;
+    letter-spacing: 3.2px;
+    line-height: normal;
+}

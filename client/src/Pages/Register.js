@@ -22,8 +22,6 @@ const Login = () => {
     <div>
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 8 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
