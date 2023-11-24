@@ -8,8 +8,19 @@ import lock from '../padlock.png';
 const Login = () => {
   const navigate = useNavigate();
   const onFinish = (values) => {
-    console.log("Success:", values);
-    navigate("/homepage");
+    var userlog = document.getElementById("user").value;
+    var passlog = document.getElementById("password").value;
+    //get list of usernames and passwords from database here
+    var user = "CSEfaculty";
+    var pass = "Lords@312";
+
+    if (userlog === user && passlog === pass) {
+      console.log("Success:", values);
+      navigate("/homepage");
+    }
+    else {
+      alert("Username or Password is incorrect");
+    }
   };
   return (
     <div className="login-page">
@@ -24,10 +35,10 @@ const Login = () => {
           <div className="inputbox">
             <img className='logo' src={user} alt="user"/>
             <div
-              name="email"
+              name="email"//change this email to user after making change in database
               rules={[{ required: true, message: "Please input your Email!" }]}
             >
-              <input className="textbox" placeholder="enter username"/>
+              <input className="textbox" id="user" placeholder="enter username" required/>
             </div>
           </div>
           <div className="inputbox">
@@ -39,7 +50,7 @@ const Login = () => {
                 { min: 6, message: "Password must be minimum 6 characters." },
               ]}
             >
-              <input type="password" className="textbox" placeholder="enter password"/>
+              <input type="password" className="textbox" id="password" placeholder="enter password" required/>
             </div>
           </div>
             <button type="submit" className="login-button">SUBMIT</button>
