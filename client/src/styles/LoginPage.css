@@ -8,7 +8,7 @@
 .login-back {
     background-color: #ffffff;
     border-radius: 15px;
-    height: 25em;
+    height: 20em;
     width: 40em;
     display: flex;
     flex-direction: column;
@@ -42,38 +42,42 @@
     align-items: center;
     margin-bottom: 2em;
     background-color: #f2f2f2;
+    padding-right: 30px;
+    border-radius: 10px;
 }
 
 .textbox {
-    background: none;
-    height: 59px;
+    background: #f2f2f2;
     width: 481px;
     border: none;
 
     font-family: "Inter-Regular", Helvetica;
-    font-size: 32px;
     font-weight: 400;
 }
 
+.textbox:focus {
+    border: none;
+    outline: none;
+}
+
 .logo {
-    height: 32px;
+    height: 50px;
     object-fit: cover;
-    width: 32px;
+    width: 50px;
     padding: 14.5px;
     opacity: 0.5;
 }
 
-button {
+.login-button {
     background-color: #2f76ff;
-    border-radius: 20px;
-    height: 81px;
+    border-radius: 10px;
+    height: 40px;
     width: 348px;
     border: none;
 
     color: #ffffff;
     font-family: "Inter-Medium", Helvetica;
-    font-size: 64px;
+    font-size: 20px;
     font-weight: 500;
-    letter-spacing: 3.2px;
     line-height: normal;
 }
