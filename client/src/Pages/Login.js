@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input } from "antd";
+import { Form } from "antd";
 import { useNavigate } from "react-router-dom";
 import '../styles/LoginPage.css'
 import user from '../user.png';
