@@ -29,7 +29,7 @@ const HomePage = () => {
             <img className="option-logo" src={mark} alt="" />
             Marks
           </button>
-          <button onClick={navmarks} className="home-buttons">
+          <button onClick={navreport} className="home-buttons">
             <img className="option-logo" src={rep} alt="" />
             Reports Generation
           </button>
