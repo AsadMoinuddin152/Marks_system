@@ -1,31 +1,38 @@
-import React from "react";
-import { Form, Input } from "antd";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Form, Input, Button } from "antd";
 import axios from "axios";
 
-const Login = () => {
-  const navigate = useNavigate();
+const Register = () => {
+  const [loading, setLoading] = useState(false);
+
   const onFinish = async (values) => {
-    console.log("Success:", values);
     try {
-      const response = await axios.post("/api/v1/faculty/register", values);
-      console.log(response);
+      setLoading(true);
+
+      const response = await axios.post("/api/v1/faculty/register", values, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
       if (response.data.success) {
-        navigate("/login");
+        console.log("Registration successful:", response.data);
+        // Redirect to login page or perform any other action
+      } else {
+        console.error("Registration failed:", response.data.message);
+        // Handle the registration failure
       }
     } catch (error) {
-      console.log(error);
+      console.error("Registration error:", error);
+      // Handle other errors (e.g., network issues)
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div>
-      <Form
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-      >
-        Register
+      <Form name="basic" onFinish={onFinish}>
         <Form.Item
           label="First Name"
           name="firstName"
@@ -68,18 +75,28 @@ const Login = () => {
           label="Confirm Password"
           name="confirmPassword"
           rules={[
-            { required: true, message: "Please input your Password!" },
+            { required: true, message: "Please confirm your Password!" },
             { min: 6, message: "Password must be minimum 6 characters." },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject("The two passwords do not match!");
+              },
+            }),
           ]}
         >
           <Input.Password />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 8 }}>
-          <button type="submit">Submit</button>
+        <Form.Item>
+          <Button type="primary" htmlType="submit" loading={loading}>
+            Register
+          </Button>
         </Form.Item>
       </Form>
     </div>
   );
 };
 
-export default Login;
+export default Register;
