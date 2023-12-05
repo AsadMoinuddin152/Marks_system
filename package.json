@@ -25,8 +25,13 @@
     "moment": "^2.29.4",
     "mongoose": "^7.0.4",
     "morgan": "^1.10.0",
+<<<<<<< HEAD
     "nodemon": "^2.0.22",
     "pdf-lib": "^1.17.1",
     "react-scripts": "^5.0.1"
+=======
+    "nodemon": "^3.0.1",
+    "pdf-lib": "^1.17.1"
+>>>>>>> ab8fe61c4a662c52f8acae7f7ddef0cd38e5cc30
   }
 }

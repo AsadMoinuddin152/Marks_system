@@ -6,35 +6,35 @@ const FacultyModel = require("../models/facultyModel");
 // login callback
 const loginController = async (req, res) => {
   try {
-    // get user data from request body
-    let { email, password } = req.body;
-    // check if user exists
+    const { email, password } = req.body;
+
     const existingUser = await facultyModel.findOne({ email });
-    console.log(existingUser);
+
     if (!existingUser) {
       return res.status(200).send({
-        message: "faculty not found",
+        message: "Faculty not found",
         success: false,
       });
     }
-    // check if password is correct
+
     const isPasswordCorrect = await bcrypt.compare(
       password,
       existingUser.password
     );
+
     if (!isPasswordCorrect) {
       return res.status(200).send({
         message: "Invalid credentials",
         success: false,
       });
     }
-    // generate token
+
     const token = jwt.sign(
       { email: existingUser.email, id: existingUser._id },
-      "test",
+      process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
-    // send user data
+
     res.status(200).send({
       success: true,
       data: existingUser,
@@ -43,7 +43,7 @@ const loginController = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send({
-      message: "login error",
+      message: "Login error",
       success: false,
       error,
     });
@@ -52,11 +52,11 @@ const loginController = async (req, res) => {
 
 const registerController = async (req, res) => {
   try {
-    // check if user exists
     const existingUser = await FacultyModel.findOne({ email: req.body.email });
+
     if (existingUser) {
       return res.status(200).json({
-        message: "faculty already exists",
+        message: "Faculty already exists",
         success: false,
       });
     }
@@ -70,16 +70,16 @@ const registerController = async (req, res) => {
     await newFaculty.save();
 
     res.status(200).json({
-      message: "faculty created successfully",
+      message: "Faculty created successfully",
       success: true,
       data: newFaculty,
     });
   } catch (err) {
-    console.log("register controller err", err);
+    console.log("Register controller error", err);
     res.status(500).json({
-      message: "register error",
+      message: "Register error",
       success: false,
-      err,
+      error: err,
     });
   }
 };
