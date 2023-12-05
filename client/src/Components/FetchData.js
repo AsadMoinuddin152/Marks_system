@@ -1,9 +1,10 @@
+//tried making a component for the filter
+
 import React from 'react';
 import { useState, useEffect } from 'react';
 import Data from '../temp/data.json';
 
-const Attendance = () => {
-
+const FetchData = () => {
     const [selectedDept, setSelectedDept] = useState();
     const [selectedSection, setSelectedSection] = useState("");
 
@@ -12,7 +13,6 @@ const Attendance = () => {
     }, [selectedDept]);
 
     const filteredDepartment = Data.filter(student => student.dept === selectedDept);
-    let filteredStudents
     if (selectedDept === "CSE") {
         filteredStudents = filteredDepartment.filter(student => student.section === selectedSection);
     }
@@ -21,8 +21,7 @@ const Attendance = () => {
     }
 
     return (
-        <div className="attendance-page">
-            <h1>Attendance</h1>
+        <div className="fetch-data">
             <select value={selectedDept} onChange={d => setSelectedDept(d.target.value)}>
                 <option hidden>select department</option>
                 <option value="CSE">CSE</option>
@@ -43,14 +42,13 @@ const Attendance = () => {
                 <tr key={student.id}>
                     <td>{student.name}</td>
                     <td>Department: {student.dept}</td>
-                    { student.section ? ( <td>Section: {student.section}</td>) : null}
-                    {/* the input will modify the json datafile*/}
-                    <td><input type="number" min="0" max="100" id={student.id+"attendance"}/></td>
+                    <td>Section: {student.section}</td>
                 </tr>
-            ))}
-            <button type="button">save</button>
+                ))}
         </div>
-    );
-};
+    )
+}
 
-export default Attendance
+export let filteredStudents
+
+export default FetchData

@@ -14,12 +14,37 @@
     margin-bottom: 40px;
 }
 
+.home-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    padding-bottom: 40px;
+}
+
+.logout-button {
+    width: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #90B6FF;
+    border: none;
+    border-radius: 10px;
+    margin-right: 100px;
+}
+
+.logout-logo {
+    width: 20px;
+    height: 20px;
+    filter: invert(100);
+}
+
 .home-text {
     font-family: Inter;
     font-size: 64px;
     font-weight: 400;
-    padding-left: 100px;
-    padding-bottom: 40px;
+    margin-left: 100px;
 }
 
 .home-options {

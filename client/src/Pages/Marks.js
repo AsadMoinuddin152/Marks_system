@@ -1,8 +1,12 @@
 import React from "react";
+import FetchData from "../Components/FetchData";
 
 const Marks = () => {
     return (
-        <h1>Marks</h1>
+        <div className="marks-page">
+            <h1>Marks</h1>
+            <FetchData />
+        </div>
     );
 };
 

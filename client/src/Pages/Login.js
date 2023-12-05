@@ -5,6 +5,8 @@ import '../styles/LoginPage.css'
 import user from '../user.png';
 import lock from '../padlock.png';
 
+
+export var isLoggedIn = false;
 const Login = () => {
   const navigate = useNavigate();
   const onFinish = (values) => {
@@ -16,6 +18,7 @@ const Login = () => {
 
     if (userlog === user && passlog === pass) {
       console.log("Success:", values);
+      isLoggedIn = true;
       navigate("/homepage");
     }
     else {
