@@ -4,23 +4,23 @@ const FacultySchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "firstName is require"],
+      required: [true, "firstName is required"],
     },
     lastName: {
       type: String,
-      required: [true, "lastName is require"],
+      required: [true, "lastName is required"],
     },
-    Id: {
+    id: {
       type: String,
-      required: [true, "Id is require"],
+      required: [true, "id is required"],
     },
     email: {
       type: String,
-      required: [true, "email is require"],
+      required: [true, "email is required"],
     },
     password: {
       type: String,
-      required: [true, "password is require"],
+      required: [true, "password is required"],
     },
     role: {
       type: String,

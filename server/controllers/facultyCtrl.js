@@ -1,19 +1,17 @@
-const facultyModel = require("../models/facultyModel");
+const FacultyModel = require("../models/facultyModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const FacultyModel = require("../models/facultyModel");
 
-// login callback
 const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const existingUser = await facultyModel.findOne({ email });
+    const existingUser = await FacultyModel.findOne({ email });
 
     if (!existingUser) {
-      return res.status(200).send({
-        message: "Faculty not found",
+      return res.status(404).json({
         success: false,
+        message: "Faculty not found",
       });
     }
 
@@ -23,9 +21,9 @@ const loginController = async (req, res) => {
     );
 
     if (!isPasswordCorrect) {
-      return res.status(200).send({
-        message: "Invalid credentials",
+      return res.status(401).json({
         success: false,
+        message: "Invalid credentials",
       });
     }
 
@@ -35,17 +33,17 @@ const loginController = async (req, res) => {
       { expiresIn: "1d" }
     );
 
-    res.status(200).send({
+    return res.status(200).json({
       success: true,
       data: existingUser,
       token,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).send({
-      message: "Login error",
+    console.error("Login error:", error);
+    return res.status(500).json({
       success: false,
-      error,
+      message: "Login error",
+      error: error.message,
     });
   }
 };

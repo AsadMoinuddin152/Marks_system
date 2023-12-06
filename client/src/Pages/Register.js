@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Input, Button } from "antd";
-import axios from "axios";
+import axios from "../temp/axiosConfig";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
