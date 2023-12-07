@@ -1,28 +1,23 @@
 const express = require("express");
-const colors = require("colors");
-const morgan = require("morgan"); // Fixed typo
+const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDB = require("./server/config/db");
+const facultyRoutes = require("./server/routes/facultyRoutes");
 
-// dotenv config
 dotenv.config();
-
-// mongodb connection
 connectDB();
 
-// rest object
 const app = express();
 
-// Routes
-app.use("/api/v1/faculty", require("./server/routes/facultyRoutes"));
+app.use(morgan("dev"));
+app.use(express.json()); // Parse JSON requests
 
-// Port
+app.use("/api/v1/faculty", facultyRoutes); // Use the entire facultyRoutes with "/api/v1/faculty" prefix
+
 const port = process.env.PORT || 8080;
 
-// Listen port
 app.listen(port, () => {
   console.log(
-    `Server Running in ${process.env.NODE_MODE} Mode on port ${process.env.PORT}`
-      .bgCyan.white
+    `Server Running in ${process.env.NODE_MODE} Mode on port ${port}`
   );
 });
