@@ -104,19 +104,19 @@ const Report = () => {
             }
             { (selectedDept || (selectedDept === "CSE" && selectedSection)) && selectedCIE ? (
                 <table className="namest">
-                <tr className="headrow">
-                    <td>NAME</td>
-                    <td>REPORT CARD</td>
-                </tr>
-                {filteredStudents.map(student => (
-                    <tr key={student.id} className="datarow">
-                        <td>{student.name}</td>
-                        <button type="button" className="viewbutton" onClick={() => view("s"+student.id)}>view</button>
-                        <button type="button" className="cardbutton" onClick={() => save("s"+student.id)}>save</button>
+                    <button type="button" className="downloadall" onClick={() => dall()}>Save All</button>
+                    <tr className="headrow">
+                        <td>NAME</td>
+                        <td>REPORT CARD</td>
                     </tr>
-                ))}
-                <button type="button" className="downloadall" onClick={() => dall()}>Save All</button>
-            </table>
+                    {filteredStudents.map(student => (
+                        <tr key={student.id} className="datarow">
+                            <td>{student.name}</td>
+                            <button type="button" className="viewbutton" onClick={() => view("s"+student.id)}>view</button>
+                            <button type="button" className="cardbutton" onClick={() => save("s"+student.id)}>save</button>
+                        </tr>
+                    ))}
+                </table>
             ) : null}
             <div className="popup" onClick={() => closepopup()}>
                 {filteredStudents.map(student => (
