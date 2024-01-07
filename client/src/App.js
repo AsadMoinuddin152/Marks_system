@@ -4,6 +4,7 @@ import Register from "./Pages/Register";
 import Attendance from "./Pages/Attendance";
 import Marks from "./Pages/Marks";
 import Report from "./Pages/Report";
+import Temp from "./Components/Temp";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/marks" element={<Marks />} />
           <Route path="/report" element={<Report />} />
+          <Route path="/temp" element={<Temp />} />
         </Routes>
       </BrowserRouter>
     </div>

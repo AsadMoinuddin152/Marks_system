@@ -1,0 +1,13 @@
+.headrow {
+    background-color: rgb(47, 53, 79);
+    color: white;
+}
+
+.datarow {
+    box-shadow: rgba(0, 0, 0, 0.04) 0px 3px 5px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}

@@ -1,88 +1,147 @@
-import React from 'react';
+import React from "react";
+import { useState, useEffect } from 'react';
 import Data from '../temp/data.json';
-import { PDFDocument } from 'pdf-lib';
+import html2canvas from "html2canvas";
+import '../styles/Data.css';
+import '../styles/Report.css';
 
 const Report = () => {
-    const [file, setFile] = useState(null);
-   
-    React.useEffect(() => {
-       writeDataToPDF();
-    }, []);
 
-    async function writeDataToPDF() {
-    // Load an existing PDF
-    const pdfDoc = await PDFDocument.load('/pdf.pdf');
+    const [selectedDept, setSelectedDept] = useState();
+    const [selectedSection, setSelectedSection] = useState("");
+    const [selectedCIE, setSelectedCIE] = useState("");
 
-    // Embed the Helvetica font
-    const helveticaFont = await pdfDoc.embedFont(PDFDocument.Font.Helvetica);
+    useEffect(() => {
+        setSelectedSection("");
+        setSelectedCIE("");
+    }, [selectedDept]);
 
-    // Get the first page of the PDF
-    const firstPage = pdfDoc.getPages()[0];
+    useEffect(() => {
+        setSelectedCIE("");
+    }, [selectedSection]);
 
-    // Get the width and height of the first page
-    const { width, height } = firstPage.getSize();
+    const filteredDepartment = Data.filter(student => student.dept === selectedDept);
 
-    // Add each student to the PDF
-    Data.forEach((student, index) => {
-        const yOffset = height - (20 * (index + 1));
+    let filteredStudents;
+    if (selectedDept === "CSE") {
+        filteredStudents = filteredDepartment.filter(student => student.section === selectedSection);
+    }
+    else {
+        filteredStudents = filteredDepartment
+    }
 
-        // Draw the student ID on the first page
-        firstPage.drawText(`ID: ${student.id}`, {
-            x: 5,
-            y: yOffset,
-            size: 14,
-            font: helveticaFont,
-        });
+    const view = (id) => {
+        document.getElementById(id).style.display = "block";
+        document.getElementsByClassName("popup")[0].style.display = "flex";
+    }
 
-        // Draw the student name on the first page
-        firstPage.drawText(`Name: ${student.name}`, {
-            x: 5,
-            y: yOffset - 20,
-            size: 14,
-            font: helveticaFont,
-        });
+    const save = (id) => {
+        document.getElementById(id).style.display = "block";
+        document.getElementsByClassName("popup")[0].style.display = "flex";
+        html2canvas(document.getElementById(id)).then(canvas => {
+            var a = document.createElement('a');
+            a.href = canvas.toDataURL("image/png");
+            a.download = id+'_report.png';
+            a.click();
+            a.remove();
+        })
+        document.getElementById(id).style.display = "none";
+        document.getElementsByClassName("popup")[0].style.display = "none";
+    }
 
-        // Draw the student department on the first page
-        firstPage.drawText(`Department: ${student.dept}`, {
-            x: 5,
-            y: yOffset - 40,
-            size: 14,
-            font: helveticaFont,
-        });
-    });
+    const closepopup = () => {
+        let cards = document.getElementsByClassName("cardt");
+        for (let x = 0; x < cards.length; x++) {
+            cards[x].style.display = "none";
+        }
+        document.getElementsByClassName("popup")[0].style.display = "none";
+    }
 
-    // Serialize the PDF to bytes (a Uint8Array)
-    const pdfBytes = await pdfDoc.save();
-
-     // Create a Blob from the bytes
-     const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
-
-     // Create a local object URL for the Blob
-     const pdfUrl = URL.createObjectURL(pdfBlob);
- 
-     // Update the file state to trigger a re-render with the new PDF URL
-     setFile(pdfUrl);
-
-    // For example, you could write these bytes to a file
-    // or send them to a server, etc.
-}
-    React.useEffect(() => {
-        writeDataToPDF();
-    }, []);
+    const dall = () => {
+        document.getElementsByClassName("popup")[0].style.display = "flex";
+        let cards = document.getElementsByClassName("cardt");
+        for (let x = 0; x < cards.length; x++) {
+            cards[x].style.display = "block";
+            html2canvas(cards[x]).then(canvas => {
+                var a = document.createElement('a');
+                a.href = canvas.toDataURL("image/png");
+                a.download = cards[x].id+'_report.png';
+                a.click();
+                a.remove();
+            })
+            cards[x].style.display = "none";
+        }
+        document.getElementsByClassName("popup")[0].style.display = "none";
+    }
 
     return (
-        <div>
-            {
-                Data.map(student => (
-                    <tr key={student.id}>
-                        <td>{student.id}</td>
-                        <td>{student.name}</td>
-                        <td>Department: {student.dept}</td>
-                    </tr>
-                ))
-            }
-        </div>
-    )
-}
+        <div className="report-page">
+            <h1>Reports</h1>
+            <select value={selectedDept} onChange={d => setSelectedDept(d.target.value)}>
+                <option hidden>select department</option>
+                <option value="CSE">CSE</option>
+                <option value="AI-ML">AI-ML</option>
+                <option value="DS">DS</option>
+            </select>
 
-export default Report;
+            { selectedDept === "CSE" ? (
+                    <select value={selectedSection} onChange={s => setSelectedSection(s.target.value)}>
+                        <option value="" hidden>select section</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                ) : null
+            }
+
+            { selectedDept || (selectedDept === "CSE" && selectedSection) ? (
+                    <select value={selectedCIE} onChange={c => setSelectedCIE(c.target.value)}>
+                    <option value="" hidden>select CIE</option>
+                    <option value="CIE-1">CIE - 1</option>
+                    <option value="CIE-2">CIE - 2</option>
+                </select>
+                ) : null
+            }
+            { (selectedDept || (selectedDept === "CSE" && selectedSection)) && selectedCIE ? (
+                <table className="namest">
+                <tr className="headrow">
+                    <td>NAME</td>
+                    <td>REPORT CARD</td>
+                </tr>
+                {filteredStudents.map(student => (
+                    <tr key={student.id} className="datarow">
+                        <td>{student.name}</td>
+                        <button type="button" className="viewbutton" onClick={() => view("s"+student.id)}>view</button>
+                        <button type="button" className="cardbutton" onClick={() => save("s"+student.id)}>save</button>
+                    </tr>
+                ))}
+                <button type="button" className="downloadall" onClick={() => dall()}>Save All</button>
+            </table>
+            ) : null}
+            <div className="popup" onClick={() => closepopup()}>
+                {filteredStudents.map(student => (
+                    <div className="cardt" id={"s"+student.id}>
+                        <h1>{student.name}</h1>
+                        <h2>{student.dept}</h2>
+                        { student.section ? ( <p>{student.section}</p>) : null}
+                        { selectedCIE === "CIE-1" ? (
+                            <>
+                                <p>assignment 1: {student["A-1"]}</p>
+                                <p>cie 1: {student["CIE-1"]}</p>    
+                                <p>total: {student["total-1"]}</p>
+                            </>
+                        ) : selectedCIE === "CIE-2" ? (
+                            <>
+                                <p>assignment 2: {student["A-2"]}</p>
+                                <p>cie 2: {student["CIE-2"]}</p>
+                                <p>total: {student["total-2"]}</p>
+                            </>
+                        ) : null}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default Report

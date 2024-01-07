@@ -4,7 +4,13 @@ import "../styles/HomePage.css";
 import attend from "../attendance.png";
 import mark from "../marks.png";
 import rep from "../report.png";
+import down from "../download.png"
 import logout from "../exit.png";
+
+import Attendance from "./Attendance";
+import Marks from "./Marks";
+import Report from "./Report";
+import Download from "./Download";
 // import { isLoggedIn } from './Login.js';
 
 const HomePage = () => {
@@ -19,13 +25,28 @@ const HomePage = () => {
   }
   ^for confirming login */
   const navattend = () => {
-    navigate("/attendance");
+    document.getElementById("show-attend").style.display = "block";
+    document.getElementById("show-marks").style.display = "none";
+    document.getElementById("show-report").style.display = "none";
+    document.getElementById("show-download").style.display = "none";
   };
   const navmarks = () => {
-    navigate("/marks");
+    document.getElementById("show-attend").style.display = "none";
+    document.getElementById("show-marks").style.display = "block";
+    document.getElementById("show-report").style.display = "none";
+    document.getElementById("show-download").style.display = "none";
   };
   const navreport = () => {
-    navigate("/report");
+    document.getElementById("show-attend").style.display = "none";
+    document.getElementById("show-marks").style.display = "none";
+    document.getElementById("show-report").style.display = "block";
+    document.getElementById("show-download").style.display = "none";
+  };
+  const navdownload = () => {
+    document.getElementById("show-attend").style.display = "none";
+    document.getElementById("show-marks").style.display = "none";
+    document.getElementById("show-report").style.display = "none";
+    document.getElementById("show-download").style.display = "block";
   };
   const navlogin = () => {
     navigate("/login");
@@ -40,19 +61,29 @@ const HomePage = () => {
           <img className="logout-logo" src={logout} alt="logout" />
         </button>
       </div>
-      <div className="home-options">
-        <button onClick={navattend} className="home-buttons">
-          <img className="option-logo" src={attend} alt="" />
-          Attendance
-        </button>
-        <button onClick={navmarks} className="home-buttons">
-          <img className="option-logo" src={mark} alt="" />
-          Marks
-        </button>
-        <button onClick={navreport} className="home-buttons">
-          <img className="option-logo" src={rep} alt="" />
-          Reports Generation
-        </button>
+      <div className="content">
+        <div className="home-options">
+          <button onClick={navattend} className="home-buttons">
+            <img className="option-logo" src={attend} alt="" />
+            Attendance
+          </button>
+          <button onClick={navmarks} className="home-buttons">
+            <img className="option-logo" src={mark} alt="" />
+            Marks
+          </button>
+          <button onClick={navreport} className="home-buttons">
+            <img className="option-logo" src={rep} alt="" />
+            Reports Generation
+          </button>
+          <button onClick={navdownload} className="home-buttons">
+            <img className="option-logo" src={down} alt="" />
+            Download Data
+          </button>
+        </div>
+        <div className="pages" id="show-attend"><Attendance /></div>
+        <div className="pages" id="show-marks"><Marks /></div>
+        <div className="pages" id="show-report"><Report /></div>
+        <div className="pages" id="show-download"><Download /></div>
       </div>
     </div>
   );

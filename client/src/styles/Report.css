@@ -1,0 +1,24 @@
+.cardt {
+    display: none;
+    background-color: white;
+    width: max-content;
+    border: 2px solid black;
+    padding: 100px 200px;
+}
+
+.popup {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.29);
+    cursor: pointer;
+}

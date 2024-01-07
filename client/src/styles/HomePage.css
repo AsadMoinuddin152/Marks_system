@@ -49,16 +49,17 @@
 
 .home-options {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: fit-content;
 }
 
 .home-buttons {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border-radius: 20px;
     border: 4px solid #90B6FF;
     background: #FFFFFF;
-    margin: 20px;
+    margin: 0px 20px 20px 20px;
 
     display: flex;
     flex-direction: column;
@@ -67,7 +68,10 @@
 
     color: #90B6FF;
     font-family: Inter;
-    font-weight: 400;
+    font-weight: 700;
+    font-size: 15px;
+    
+    transition-duration: 0.2s;
 }
 
 .home-buttons:hover {
@@ -77,10 +81,12 @@
 }
 
 .home-buttons:hover .option-logo {
+    transition-duration: 0.2s;
     filter: brightness(200);
 }
 
 .home-buttons:focus {
+    transition-duration: 0.2s;
     font-size: 12px;
 }
 
@@ -91,7 +97,16 @@
 }
 
 .option-logo {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
+    width: 40px;
+    height: 40px;
 }
+
+.content {
+    display: flex;
+}
+
+.pages {
+    display: none;
+    width: 100vw;
+}
+
