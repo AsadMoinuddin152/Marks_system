@@ -54,15 +54,7 @@ const HomePage = () => {
   return (
     <div className="home-page">
       {/* checklogin() confirm login here*/}
-      <div className="top-bar">HOME</div>
-      <div className="home-heading">
-        <div className="home-text">CSE DEPARTMENT</div>
-        <button onClick={navlogin} className="logout-button">
-          <img className="logout-logo" src={logout} alt="logout" />
-        </button>
-      </div>
-      <div className="content">
-        <div className="home-options">
+      <div className="home-options">
           <button onClick={navattend} className="home-buttons">
             <img className="option-logo" src={attend} alt="" />
             Attendance
@@ -79,11 +71,20 @@ const HomePage = () => {
             <img className="option-logo" src={down} alt="" />
             Download Data
           </button>
+      </div>
+      <div className="home-box">
+        <div className="top-bar">
+          <div className="home-text">CSE DEPARTMENT:</div>
+          <button onClick={navlogin} className="logout-button">
+                <img className="logout-logo" src={logout} alt="logout" />
+          </button>
         </div>
-        <div className="pages" id="show-attend"><Attendance /></div>
-        <div className="pages" id="show-marks"><Marks /></div>
-        <div className="pages" id="show-report"><Report /></div>
-        <div className="pages" id="show-download"><Download /></div>
+        <div className="content">
+          <div className="pages" id="show-attend"><Attendance /></div>
+          <div className="pages" id="show-marks"><Marks /></div>
+          <div className="pages" id="show-report"><Report /></div>
+          <div className="pages" id="show-download"><Download /></div>
+        </div>
       </div>
     </div>
   );
